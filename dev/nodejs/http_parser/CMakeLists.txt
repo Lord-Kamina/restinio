@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.4)
-project(http-parser C)
+project(http_parser C)
 
 if(BUILD_SHARED_LIBS)
   set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
@@ -27,8 +27,8 @@ install(
 install(
 	EXPORT NODEJS_HTTP_PARSER_ALL_TARGETS
 	NAMESPACE unofficial::http_parser::
-	FILE unofficial-http-parser-config.cmake
-	DESTINATION share/unofficial-http-parser
+	FILE unofficial-http_parser-config.cmake
+	DESTINATION share/unofficial-http_parser
 )
 
 install(FILES http_parser.h DESTINATION include)

@@ -24,9 +24,9 @@ option(RESTINIO_FMT_HEADER_ONLY "Include fmt library as header-only." ON)
 
 option(RESTINIO_ALLOW_SOBJECTIZER "Allow add_subdirectory(so_5) in the main RESTinio CMakeLists.txt" ${RESTINIO_MASTER_PROJECT})
 
-# Since v.0.6.5 a user can force usage of already installed http-parser
+# Since v.0.6.5 a user can force usage of already installed http_parser
 # library.
-option(RESTINIO_USE_EXTERNAL_HTTP_PARSER "Use already installed http-parser library" OFF)
+option(RESTINIO_USE_EXTERNAL_HTTP_PARSER "Use already installed http_parser library" ON)
 
 SET(RESTINIO_USE_BOOST_ASIO "none" CACHE STRING "Use boost version of ASIO")
 SET(RESTINIO_USE_BOOST_ASIO_VALUES "none;static;shared")
@@ -88,9 +88,9 @@ IF (RESTINIO_MASTER_PROJECT)
 
 		# HTTP parser
 		IF (RESTINIO_USE_EXTERNAL_HTTP_PARSER)
-			find_package(http-parser REQUIRED)
+			find_package(http_parser REQUIRED)
 		ELSE ()
-			find_package(unofficial-http-parser CONFIG REQUIRED)
+			find_package(unofficial-http_parser CONFIG REQUIRED)
 		ENDIF ()
 
 		# fmtlib
@@ -102,7 +102,7 @@ IF (RESTINIO_MASTER_PROJECT)
 
 		# HTTP parser
 		IF (RESTINIO_USE_EXTERNAL_HTTP_PARSER)
-			find_package(http-parser REQUIRED)
+			find_package(http_parser REQUIRED)
 		ELSE ()
 			add_subdirectory(nodejs/http_parser)
 		ENDIF ()
