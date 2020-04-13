@@ -48,36 +48,28 @@ IF (RESTINIO_MASTER_PROJECT)
 	# ------------------------------------------------------------------------------
 	# RESTinio dependencies:
 	# ASIO or Boost::ASIO
+	set (BOOST_COMPONENTS)
+	IF(RESTINIO_USE_BOOST_REGEX)
+		LIST(APPEND BOOST_COMPONENTS regex)
+		# Try to find boost for boost regex.
+	ENDIF()
+	
 	IF ( RESTINIO_USE_BOOST_ASIO MATCHES "none" )
 		SET( RESTINIO_STAND_ALONE_ASIO_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/asio/include )
 		SET( RESTINIO_STAND_ALONE_ASIO_DEFINES -DASIO_STANDALONE -DASIO_HAS_STD_CHRONO -DASIO_DISABLE_STD_STRING_VIEW)
-
-		IF(RESTINIO_USE_BOOST_REGEX)
-			# Try to find boost for boost regex.
-			SET(Boost_USE_MULTITHREADED ON)
-			find_package(Boost REQUIRED COMPONENTS regex)
-			if ( Boost_FOUND )
-				message(STATUS "Found Boost for regex.")
-			endif ()
-		ENDIF()
 	ELSE ()
-		SET(Boost_USE_MULTITHREADED ON)
 		IF ( RESTINIO_USE_BOOST_ASIO MATCHES "shared" )
 			SET(Boost_USE_STATIC_LIBS OFF)
 		ELSE ()
 			SET(Boost_USE_STATIC_LIBS ON)
 		ENDIF ()
-
-		IF(RESTINIO_USE_BOOST_REGEX)
-			find_package(Boost 1.66.0 REQUIRED COMPONENTS system regex)
-			if ( Boost_FOUND )
-				message(STATUS "Found Boost for regex.")
-			endif ()
-		ELSE()
-			find_package(Boost 1.66.0 REQUIRED COMPONENTS system regex)
-		ENDIF()
+		LIST (APPEND BOOST_COMPONENTS system)
 	ENDIF ()
-
+	LIST(LENGTH BOOST_COMPONENTS BOOST_COMPONENTS_NUM)
+	IF (BOOST_COMPONENTS_NUM GREATER_EQUAL 1)
+		SET(Boost_USE_MULTITHREADED ON)
+		find_package(Boost 1.66.0 REQUIRED COMPONENTS ${BOOST_COMPONENTS})
+	ENDIF()
 	IF (RESTINIO_FIND_DEPS)
 		# Require necessary packages.
 
