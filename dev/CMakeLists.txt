@@ -10,25 +10,25 @@ IF (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 	SET(RESTINIO_MASTER_PROJECT ON)
 ENDIF ()
 
-option(RESTINIO_INSTALL "Generate the install target." ${RESTINIO_MASTER_PROJECT})
-option(RESTINIO_TEST "Build the tests." ${RESTINIO_MASTER_PROJECT})
-option(RESTINIO_SAMPLE "Build samples." ${RESTINIO_MASTER_PROJECT})
-option(RESTINIO_INSTALL_SAMPLES "Build install samples." ${RESTINIO_MASTER_PROJECT})
-option(RESTINIO_BENCH "Build the test target." ${RESTINIO_MASTER_PROJECT})
-option(RESTINIO_INSTALL_BENCHES "Build install samples." ${RESTINIO_MASTER_PROJECT})
-option(RESTINIO_USE_BOOST_REGEX "Include Boost.Regex support." ON)
-option(RESTINIO_USE_PCRE "Include PCRE support." ON)
-option(RESTINIO_USE_PCRE2 "Include PCRE2 support." ON)
-option(RESTINIO_FIND_DEPS "Use `find_package()` for including RESTinio dependencies." OFF)
+option(RESTINIO_INSTALL "Generate the install target." OFF)
+option(RESTINIO_TEST "Build the tests." OFF)
+option(RESTINIO_SAMPLE "Build samples." OFF)
+option(RESTINIO_INSTALL_SAMPLES "Build install samples." OFF)
+option(RESTINIO_BENCH "Build the test target." OFF)
+option(RESTINIO_INSTALL_BENCHES "Build install samples." OFF)
+option(RESTINIO_USE_BOOST_REGEX "Include Boost.Regex support." OFF)
+option(RESTINIO_USE_PCRE "Include PCRE support." OFF)
+option(RESTINIO_USE_PCRE2 "Include PCRE2 support." OFF)
+option(RESTINIO_FIND_DEPS "Use `find_package()` for including RESTinio dependencies." ON)
 option(RESTINIO_FMT_HEADER_ONLY "Include fmt library as header-only." ON)
 
-option(RESTINIO_ALLOW_SOBJECTIZER "Allow add_subdirectory(so_5) in the main RESTinio CMakeLists.txt" ${RESTINIO_MASTER_PROJECT})
+option(RESTINIO_ALLOW_SOBJECTIZER "Allow add_subdirectory(so_5) in the main RESTinio CMakeLists.txt" OFF)
 
 # Since v.0.6.5 a user can force usage of already installed http_parser
 # library.
 option(RESTINIO_USE_EXTERNAL_HTTP_PARSER "Use already installed http_parser library" ON)
 
-SET(RESTINIO_USE_BOOST_ASIO "none" CACHE STRING "Use boost version of ASIO")
+SET(RESTINIO_USE_BOOST_ASIO "shared" CACHE STRING "Use boost version of ASIO")
 SET(RESTINIO_USE_BOOST_ASIO_VALUES "none;static;shared")
 
 set_property(CACHE RESTINIO_USE_BOOST_ASIO PROPERTY STRINGS ${RESTINIO_USE_BOOST_ASIO_VALUES})
